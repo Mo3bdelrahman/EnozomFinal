@@ -191,8 +191,8 @@ namespace EnozomFinal.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("BorrowDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("BorrowDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("CopyId")
                         .HasColumnType("int");
@@ -200,11 +200,11 @@ namespace EnozomFinal.Persistence.Migrations
                     b.Property<int>("CopyStatusId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("ExpectedReturnDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("ExpectedReturnDate")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateOnly?>("ReturnDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");

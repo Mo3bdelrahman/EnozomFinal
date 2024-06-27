@@ -13,9 +13,8 @@ namespace EnozomFinal.Application.Profiles
     {
         public StudentCopyProfile()
         {
-            CreateMap<BorrowDto, StudentCopy>();
-            //CreateMap<ReturnDto, StudentCopy>()
-            //    .ForMember(dest => dest.Id, src => src.MapFrom(src => src.BorrowId));
+            CreateMap<BorrowDto, StudentCopy>()
+                .ForMember(dest => dest.ExpectedReturnDate , src => src.MapFrom(src => src.ExpectedReturnDate));
         }
     }
 }

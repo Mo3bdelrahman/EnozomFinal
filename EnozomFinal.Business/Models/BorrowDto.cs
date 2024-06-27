@@ -10,6 +10,6 @@ namespace EnozomFinal.Application.Models
     {
         public int StudentId { get; set; }
         public int CopyId { get; set; }
-        public DateOnly ExpectedReturnDate { get; set; }
+        public DateTime ExpectedReturnDate { get; set; }
     }
 }

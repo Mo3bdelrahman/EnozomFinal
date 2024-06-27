@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnozomFinal.Persistence.Migrations
 {
     [DbContext(typeof(EnozomFinalContext))]
-    [Migration("20240627094100_Seeding")]
-    partial class Seeding
+    [Migration("20240627132941_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,8 +194,8 @@ namespace EnozomFinal.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("BorrowDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("BorrowDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("CopyId")
                         .HasColumnType("int");
@@ -203,11 +203,11 @@ namespace EnozomFinal.Persistence.Migrations
                     b.Property<int>("CopyStatusId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("ExpectedReturnDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("ExpectedReturnDate")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateOnly?>("ReturnDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");

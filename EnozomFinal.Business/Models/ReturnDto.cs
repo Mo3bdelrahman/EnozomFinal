@@ -8,7 +8,7 @@ namespace EnozomFinal.Application.Models
 {
     public class ReturnDto
     {
-        public int BorrowId { get; set; }
+        public int BorrowingId { get; set; }
         public int StatusId { get; set; }
     }
 }
