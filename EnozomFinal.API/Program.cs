@@ -1,4 +1,5 @@
 using EnozomFinal.Application;
+using EnozomFinal.Application.Middlewares;
 using EnozomFinal.Persistence;
 
 
@@ -29,6 +30,7 @@ namespace EnozomFinal.API
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

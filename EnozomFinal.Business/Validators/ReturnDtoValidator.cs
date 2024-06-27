@@ -12,7 +12,7 @@ namespace EnozomFinal.Application.Validators
     {
         public ReturnDtoValidator()
         {
-            RuleFor(e => e.BorrowId)
+            RuleFor(e => e.BorrowingId)
                 .NotNull().WithMessage("{PropertyName} is required.")
                 .NotEmpty().WithMessage("{PropertyName} is required.");
             RuleFor(e => e.StatusId)
