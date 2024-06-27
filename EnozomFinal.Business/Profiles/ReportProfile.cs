@@ -16,7 +16,6 @@ namespace EnozomFinal.Application.Profiles
             CreateMap<Copy, ReportDto>()
                 .ForMember(dest => dest.BookName, src => src.MapFrom(src => src.Book.Name))
                 .ForMember(dest => dest.Status, src => src.MapFrom(src => src.CopyStatus.Name));
-
         }
     }
 }
