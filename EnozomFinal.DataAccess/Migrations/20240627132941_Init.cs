@@ -4,6 +4,8 @@ using MySql.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace EnozomFinal.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -96,9 +98,9 @@ namespace EnozomFinal.Persistence.Migrations
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     CopyId = table.Column<int>(type: "int", nullable: false),
                     CopyStatusId = table.Column<int>(type: "int", nullable: false),
-                    BorrowDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    ExpectedReturnDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    ReturnDate = table.Column<DateOnly>(type: "date", nullable: true)
+                    BorrowDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ExpectedReturnDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -123,6 +125,46 @@ namespace EnozomFinal.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Clean Code" },
+                    { 2, "Algorithms" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CopyStatus",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Good" },
+                    { 2, "Damaged" },
+                    { 3, "Lost" },
+                    { 4, "Borrowed" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Students",
+                columns: new[] { "Id", "Email", "Name", "PhoneNumber", "StNumber" },
+                values: new object[,]
+                {
+                    { 1, "Ali@Enozom.com", "Ali", "0122224400", "1" },
+                    { 2, "Mohamed@Enozom.com", "Mohamed", "0111155000", "2" },
+                    { 3, "Ahmed@Enozom.com", "Ahmed", "0155553311", "3" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Copies",
+                columns: new[] { "Id", "BookId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 },
+                    { 3, 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Copies_BookId",

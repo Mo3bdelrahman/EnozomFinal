@@ -1,8 +1,5 @@
 ﻿using EnozomFinal.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mime;
 using System.Text;
@@ -50,7 +47,7 @@ namespace EnozomFinal.Application.Middlewares
                     statusCode = HttpStatusCode.NotFound;
                     break;
                 case Exception:
-                    statusCode = HttpStatusCode.BadRequest;
+                    statusCode = HttpStatusCode.InternalServerError;
                     break;
             }
 

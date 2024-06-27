@@ -43,16 +43,32 @@ namespace EnozomFinal.Application.Services
                 throw new Exceptions.NotFoundException("Book Copy Not Found");
 
             //check if copy status is good
-            if(bookCopy.CopyStatusId != 1)
+            if (bookCopy.CopyStatusId == 4)
+            {
+                throw new Exceptions.BadRequestException("Book Copy already Borrowed");
+            }
+            else if (bookCopy.CopyStatusId != 1)
+            {
                 throw new Exceptions.BadRequestException("Book Status is Not Good");
+            }
 
 
             var borrowing = _mapper.Map<StudentCopy>(borrowDto);
-            borrowing.BorrowDate = DateOnly.FromDateTime(DateTime.Now);
+            borrowing.BorrowDate = DateTime.Now;
+            borrowing.CopyStatusId = 1;
             var res = await _borrowingRepository.AddBorrowingAsync(borrowing);
             // check if borrowing added successfuly
             if (!res)
                 throw new Exceptions.BadRequestException("Error While add Borrwing");
+
+            //update book copy state
+            bookCopy.CopyStatusId = 4;
+            var copyRes = await _borrowingRepository.UpdateBorrowingAsync(borrowing);
+
+            //check if book copy updated successfuly
+            if (!copyRes)
+                throw new Exceptions.BadRequestException("Error while Return");
+
 
             return "Sccessful Borrowing!";            
         }
@@ -77,10 +93,12 @@ namespace EnozomFinal.Application.Services
                 throw new Exceptions.BadRequestException("Error while Return");
 
             //check if book copy borrowed
-            if (copy.CopyStatusId != 4)  //i have time i'll search for other solution betar than magic number
+            if (copy.CopyStatusId != 4)  //if i have time i'll search for other solution betar than magic number
                 throw new Exceptions.BadRequestException("Book Copy already returned");
 
-            borrowing.ReturnDate = DateOnly.FromDateTime(DateTime.Now);
+
+
+            borrowing.ReturnDate = DateTime.Now;
             borrowing.CopyStatusId = returnDto.StatusId;
 
             var borrowRes = await _borrowingRepository.UpdateBorrowingAsync(borrowing);
@@ -89,7 +107,11 @@ namespace EnozomFinal.Application.Services
             if (!borrowRes)
                 throw new Exceptions.BadRequestException("Error while Return");
 
-            //update book cop state
+            if (returnDto.StatusId == 4)
+            {
+                throw new Exceptions.BadRequestException("Invalid statusId");
+            }
+            //update book copu state
             copy.CopyStatusId = returnDto.StatusId;
             var copyRes = await _borrowingRepository.UpdateBorrowingAsync(borrowing);
 
